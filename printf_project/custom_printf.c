@@ -130,6 +130,40 @@ char *numberToBinary(unsigned int num)
     return result;
 }
 
+int handleSpecifier(char specifier, va_list args){
+    char *str;
+
+    if(specifier == 'c'){
+        return printChar(va_arg(args, int));
+    }
+    if (specifier == 's'){
+        return printString(va_arg(args, char *));
+    }
+    if (specifier == 'd' || specifier == 'i'){
+        str = numberToString(va_arg(args, int));
+        if (!str){
+
+         return 0;
+        }
+        int len = printString(str);
+        free(str);
+        return len;
+    }
+    if (specifier == 'b'){
+        str = numberToBinary(va_arg(args, unsigned int));
+        if(!str){
+            return 0;
+        }
+        int len = printString(str);
+        free (str);
+        return len;
+    }
+    if (specifier == '%'){
+        return printChar('%');
+    }
+    return 0;
+}
+
 int customPrintf(const char *formatString, ...){
     va_list args;
     int count = 0;
