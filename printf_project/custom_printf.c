@@ -3,11 +3,13 @@
 #include <unistd.h>
 #include <stdarg.h>
 
+
 int printChar(char c)
 {
     write(1, &c, 1);
     return 1;
 }
+
 
 int printString(const char *str)
 {
@@ -199,3 +201,4 @@ int customPrintf(const char *formatString, ...){
 
     return count;
 }
+
